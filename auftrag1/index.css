@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 80px 24px;
+    background: #faf8f5;
+    color: #2c2520;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1,
+h2,
+h3,
+.step-number {
+    font-family: 'Playfair Display', serif;
+    color: #1a120e;
+}
+
+h1 {
+    font-size: clamp(2.5rem, 8vw, 3.8rem);
+    margin: 0 0 50px 0;
+    text-align: center;
+    letter-spacing: -1px;
+}
+
+.ingredients-container,
+.recipe-container,
+img {
+    width: 100%;
+    max-width: 640px;
+    margin-bottom: 50px;
+}
+
+.ingredients-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px 40px;
+    border-bottom: 1px solid #ebdcd5;
+    padding-bottom: 50px;
+}
+
+.ingredient-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 0.98rem;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #f2ede8;
+}
+
+.ingredient-name {
+    color: #3a322d;
+    font-weight: 500;
+}
+
+.ingredient-name .detail {
+    font-size: 0.8rem;
+    color: #8a7e74;
+    margin-left: 4px;
+}
+
+.ingredient-amount {
+    font-weight: 600;
+    color: #9c1c24;
+    font-size: 0.95rem;
+}
+
+img {
+    border-radius: 8px;
+}
+
+h2 {
+    font-size: 2rem;
+    margin: 0 0 40px 0;
+    letter-spacing: -0.5px;
+}
+
+.steps-list {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.step-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 24px;
+}
+
+.step-number {
+    font-size: 2.2rem;
+    font-style: italic;
+    font-weight: 700;
+    color: #9c1c24;
+    line-height: 1;
+}
+
+h3 {
+    font-size: 1.25rem;
+    margin: 0 0 12px 0;
+    letter-spacing: -0.2px;
+}
+
+.step-content p {
+    font-size: 0.98rem;
+    line-height: 1.7;
+    color: #4a4038;
+    margin: 0;
+}
+
+.recipe-links {
+    margin-top: 50px;
+    padding-top: 40px;
+    border-top: 1px solid #ebdcd5;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+a {
+    color: #9c1c24;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+    transition: 0.2s;
+}
+
+a:hover {
+    color: #1a120e;
+    border-bottom-color: #1a120e;
+}
