@@ -187,8 +187,9 @@ ul { margin: 0 0 var(--sp-2); padding-left: 1.2rem; }
 .card-grid { display: grid; gap: var(--sp-3); grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
 .product-card { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--c-line); border-radius: var(--r-md); overflow: hidden; transition: transform .18s var(--ease), box-shadow .2s, border-color .2s; }
 .product-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: transparent; }
-.product-card__media { position: relative; aspect-ratio: 4 / 3; background: var(--c-surface); display: block; }
-.product-card__media img { width: 100%; height: 100%; object-fit: cover; }
+.product-card__media { position: relative; aspect-ratio: 4 / 3; background: var(--c-surface); display: block; overflow: hidden; }
+.product-card__media img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--ease); }
+.product-card:hover .product-card__media img { transform: scale(1.045); }
 .product-card__tag { position: absolute; top: .7rem; left: .7rem; }
 .product-card__body { padding: var(--sp-2); display: flex; flex-direction: column; gap: .45rem; flex: 1; }
 .product-card__cat { font-family: var(--font-mono); font-size: .72rem; color: var(--c-accent-dark); font-weight: 500; letter-spacing: .02em; text-transform: uppercase; }
@@ -248,7 +249,8 @@ input:focus, select:focus, textarea:focus { border-color: var(--c-accent); outli
 .hero p { color: #c2d0de; font-size: clamp(1.05rem, 1.6vw, 1.22rem); max-width: 42ch; line-height: 1.7; }
 .hero__cta { display: flex; gap: var(--sp-2); flex-wrap: wrap; margin-top: var(--sp-3); }
 .hero__art { display: grid; place-items: center; }
-.hero__art img { filter: drop-shadow(0 24px 50px rgba(0, 0, 0, .45)); border-radius: var(--r-lg); }
+.hero__art img { filter: drop-shadow(0 30px 60px rgba(0, 0, 0, .5)); border-radius: var(--r-lg); animation: float 7s ease-in-out infinite; }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
 /* Trust-Ticker statt Hero-Metrik-Kacheln */
 .trust-ticker { position: relative; display: flex; flex-wrap: wrap; gap: 1.4rem 2.2rem; margin-top: var(--sp-4); padding-top: var(--sp-3); border-top: 1px solid rgba(255,255,255,.14); }
 .trust-ticker span { display: inline-flex; align-items: center; gap: .5rem; font-family: var(--font-mono); font-size: .84rem; color: #cdd9e6; }

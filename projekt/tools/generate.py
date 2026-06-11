@@ -146,48 +146,68 @@ def darken(hexcol, f=0.7):
     return "#%02x%02x%02x" % (clamp(r*f), clamp(g*f), clamp(b*f))
 
 def product_svg(p):
-    """Stilisiertes Vial + Molekül-Ring in der Produktfarbe (bolder)."""
-    c = p["color"]; cd = darken(c, .68)
-    # Hexagon-Ring (Molekül) oben links
+    """Premium Studio-Render: Glas-Vial mit Licht/Schatten, Flüssigkeit in der
+    Kategoriefarbe, dezente Molekül-Linienkunst. Bewusst heller Studio-Look
+    (Apple-artige Produktfotografie) statt flacher Farbfläche."""
     import math
-    ring = ""
-    cx, cy, r = 96, 96, 34
-    pts = []
-    for i in range(6):
-        a = math.radians(60*i - 90)
-        pts.append((cx + r*math.cos(a), cy + r*math.sin(a)))
+    c = p["color"]; cd = darken(c, .74); cl = darken(c, 1.18)
+    tint = c  # Akzentfarbe für Flüssigkeit + Linienkunst
+    uid = p["slug"].replace("-", "")
+
+    # Dezente Molekül-Linienkunst (Hexagon + Bonds) oben rechts
+    mol = ""
+    cx, cy, r = 322, 86, 30
+    pts = [(cx + r*math.cos(math.radians(60*i-90)), cy + r*math.sin(math.radians(60*i-90))) for i in range(6)]
     for i in range(6):
         x1,y1 = pts[i]; x2,y2 = pts[(i+1)%6]
-        ring += f'<line x1="{x1:.1f}" y1="{y1:.1f}" x2="{x2:.1f}" y2="{y2:.1f}" stroke="#fff" stroke-width="2.4" opacity="0.65"/>'
+        mol += f'<line x1="{x1:.1f}" y1="{y1:.1f}" x2="{x2:.1f}" y2="{y2:.1f}" stroke="{tint}" stroke-width="1.6" opacity="0.5"/>'
     for x,y in pts:
-        ring += f'<circle cx="{x:.1f}" cy="{y:.1f}" r="6" fill="#fff" opacity="0.92"/>'
-    # Peptid-Kette unten
-    chain = ""
-    x0, yb = 120, 250
-    for i in range(6):
-        x = x0 + i*28
-        y = yb + (9 if i%2 else -9)
-        chain += f'<circle cx="{x}" cy="{y}" r="8" fill="#fff" opacity="0.9"/>'
-        if i < 5:
-            x2 = x0 + (i+1)*28; y2 = yb + (9 if (i+1)%2 else -9)
-            chain += f'<line x1="{x}" y1="{y}" x2="{x2}" y2="{y2}" stroke="#fff" stroke-width="3" opacity="0.6"/>'
+        mol += f'<circle cx="{x:.1f}" cy="{y:.1f}" r="3.4" fill="{tint}" opacity="0.7"/>'
+    mol += f'<line x1="{pts[1][0]:.1f}" y1="{pts[1][1]:.1f}" x2="{pts[1][0]+24:.1f}" y2="{pts[1][1]-12:.1f}" stroke="{tint}" stroke-width="1.6" opacity="0.4"/>'
+    mol += f'<circle cx="{pts[1][0]+24:.1f}" cy="{pts[1][1]-12:.1f}" r="3" fill="{tint}" opacity="0.5"/>'
+
     return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="{html.escape(p['name'])} – {html.escape(p['size'])} Vial">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="{c}"/><stop offset="1" stop-color="{cd}"/></linearGradient>
-    <linearGradient id="liq" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity=".12"/></linearGradient>
+    <linearGradient id="bg{uid}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fdfefe"/><stop offset="0.6" stop-color="#f3f7fa"/><stop offset="1" stop-color="{c}" stop-opacity="0.10"/>
+    </linearGradient>
+    <radialGradient id="spot{uid}" cx="50%" cy="34%" r="60%">
+      <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="glass{uid}" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.95"/><stop offset="0.5" stop-color="#eef3f7"/><stop offset="1" stop-color="#cdd8e2"/>
+    </linearGradient>
+    <linearGradient id="liq{uid}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="{c}"/><stop offset="1" stop-color="{cd}"/>
+    </linearGradient>
+    <linearGradient id="cap{uid}" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="{cl}"/><stop offset="0.5" stop-color="{c}"/><stop offset="1" stop-color="{cd}"/>
+    </linearGradient>
   </defs>
-  <rect width="400" height="300" fill="url(#bg)"/>
-  <circle cx="330" cy="64" r="120" fill="#fff" opacity="0.06"/>
-  <circle cx="60" cy="250" r="90" fill="#fff" opacity="0.05"/>
-  {ring}{chain}
-  <g transform="translate(232,68)">
-    <rect x="14" y="-14" width="22" height="16" rx="3" fill="#e7edf2"/>
-    <rect x="10" y="0" width="30" height="10" rx="2" fill="#c1cdd9"/>
-    <rect x="6" y="10" width="38" height="150" rx="12" fill="#fff" opacity="0.92"/>
-    <rect x="6" y="74" width="38" height="86" rx="12" fill="url(#liq)"/>
-    <rect x="13" y="16" width="6" height="40" rx="3" fill="#fff" opacity="0.85"/>
+  <rect width="400" height="300" fill="url(#bg{uid})"/>
+  <rect width="400" height="300" fill="url(#spot{uid})"/>
+  {mol}
+  <!-- weicher Bodenschatten -->
+  <ellipse cx="200" cy="256" rx="62" ry="12" fill="{cd}" opacity="0.18"/>
+  <!-- Vial -->
+  <g transform="translate(168,58)">
+    <!-- Bördelkappe -->
+    <rect x="16" y="0" width="32" height="9" rx="2" fill="{cl}"/>
+    <rect x="12" y="8" width="40" height="16" rx="3" fill="url(#cap{uid})"/>
+    <rect x="16" y="11" width="6" height="10" rx="2" fill="#ffffff" opacity="0.35"/>
+    <!-- Hals -->
+    <rect x="22" y="24" width="20" height="10" fill="#dde6ee"/>
+    <!-- Glaskörper -->
+    <path d="M14 44 Q14 34 26 34 H38 Q50 34 50 44 V178 Q50 192 38 192 H26 Q14 192 14 178 Z" fill="url(#glass{uid})" stroke="#c2cedb" stroke-width="1"/>
+    <!-- Flüssigkeit -->
+    <path d="M17 96 H47 V176 Q47 189 36 189 H28 Q17 189 17 176 Z" fill="url(#liq{uid})"/>
+    <ellipse cx="32" cy="96" rx="15" ry="3.4" fill="#ffffff" opacity="0.25"/>
+    <!-- Glanzlichter -->
+    <rect x="20" y="44" width="5" height="138" rx="2.5" fill="#ffffff" opacity="0.7"/>
+    <rect x="42" y="60" width="3" height="110" rx="1.5" fill="#ffffff" opacity="0.35"/>
   </g>
-  <text x="20" y="280" font-family="'Spline Sans Mono', monospace" font-size="14" fill="#fff" opacity="0.85" letter-spacing="0.5">{html.escape(p['size'])}</text>
+  <text x="22" y="280" font-family="'Spline Sans Mono', ui-monospace, monospace" font-size="13" fill="{cd}" opacity="0.9" letter-spacing="0.5">{html.escape(p['size'])}</text>
+  <text x="378" y="280" text-anchor="end" font-family="'Spline Sans Mono', ui-monospace, monospace" font-size="11" fill="{cd}" opacity="0.55" letter-spacing="1">HELIX</text>
 </svg>'''
 
 def logo_svg():
