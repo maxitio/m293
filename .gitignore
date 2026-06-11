@@ -1,0 +1,9 @@
+# Installierte AI-Harness-/Skill-Ordner (regenerierbar via `npx impeccable skills install`)
+.claude/
+.cursor/
+.gemini/
+.impeccable/
+
+# OS / Editor
+Thumbs.db
+.DS_Store

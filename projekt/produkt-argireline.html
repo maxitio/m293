@@ -6,9 +6,7 @@
   <title>Argireline (Acetyl-Hexapeptid-8) – HELIX PEPTIDES</title>
   <meta name="description" content="Acetyliertes Hexapeptid – Klassiker der Kosmetik-Forschung. Nur für Forschungszwecke.">
   <link rel="icon" href="assets/img/logo.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Archivo+Expanded:wght@600;700;800&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -20,10 +18,12 @@
         <span>HELIX PEPTIDES<small>Research Grade</small></span>
       </a>
       <nav aria-label="Hauptnavigation">
-        <ul class="nav__links" id="nav-links"><li><a href="index.html">Start</a></li><li><a href="produkte.html" aria-current="page">Produkte</a></li><li><a href="kontakt.html">Kontakt</a></li></ul>
+        <ul class="nav__links" id="nav-links"><li><a href="index.html">Start</a></li><li><a href="produkte.html" aria-current="page">Produkte</a></li><li><a href="faq.html">FAQ</a></li><li><a href="kontakt.html">Kontakt</a></li></ul>
       </nav>
       <div class="nav__actions">
-        <a class="btn btn--primary" href="produkte.html">Shop</a>
+        <a class="cart-btn" href="warenkorb.html" aria-label="Warenkorb">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.4 12.2a1.6 1.6 0 0 0 1.6 1.3h8.2a1.6 1.6 0 0 0 1.6-1.3L22 7H6"/></svg><span class="cart-count" data-cart-count data-empty="true">0</span>
+        </a>
         <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="nav-links"><span></span></button>
       </div>
     </div>
@@ -39,10 +39,10 @@
           <img src="assets/img/products/argireline.svg" alt="Argireline (Acetyl-Hexapeptid-8) – 10 mg Vial" width="600">
         </div>
         <ul class="product__specs">
-          <li><strong>Reinheit</strong>98.6 %</li>
-          <li><strong>Menge</strong>10 mg</li>
-          <li><strong>Molekulargewicht</strong>888.0 g/mol</li>
-          <li><strong>Form</strong>Lyophilisiert</li>
+          <li><strong>Reinheit</strong><span>98.6 %</span></li>
+          <li><strong>Menge</strong><span>10 mg</span></li>
+          <li><strong>Mol-Gewicht</strong><span>888.0 g/mol</span></li>
+          <li><strong>Form</strong><span>Lyophilisiert</span></li>
         </ul>
       </div>
 
@@ -52,44 +52,35 @@
         <p class="lead">Acetyliertes Hexapeptid – Klassiker der Kosmetik-Forschung.</p>
         <div class="product__price">
           <span class="price">CHF&nbsp;32.90</span>
-          <span class="pill pill--accent">inkl. CoA</span>
+          <span class="pill pill--bright">inkl. CoA</span>
+        </div>
+
+        <div class="product__buy" data-buy>
+          <label class="qty" aria-label="Menge">
+            <select name="menge" aria-label="Menge" style="border:none;background:transparent;padding:.5rem .6rem">
+              <option>1</option><option>2</option><option>3</option><option>5</option><option>10</option>
+            </select>
+          </label>
+          <button class="btn btn--bright btn--lg add-to-cart" type="button" data-add="argireline">In den Warenkorb</button>
         </div>
 
         <div class="order-box">
-          <h3>Online bestellen</h3>
-          <p class="form-note">Bestellung per Formular – nach dem Absenden öffnet sich dein E-Mail-Programm mit der vorausgefüllten Anfrage.</p>
-          <form class="form" data-order-form data-product="Argireline (Acetyl-Hexapeptid-8) (10 mg)" novalidate>
+          <h3>Oder direkt per Formular bestellen</h3>
+          <p class="form-note">Nach dem Absenden erhältst du eine Bestellbestätigung. (Demo – es werden keine Daten gespeichert.)</p>
+          <form class="form" data-order-form action="danke.html" method="get" novalidate>
+            <input type="hidden" name="type" value="order">
+            <input type="hidden" name="produkt" value="Argireline (Acetyl-Hexapeptid-8) (10 mg)">
             <div class="form__row">
-              <div class="field">
-                <label>Name <span class="req">*</span></label>
-                <input type="text" name="name" autocomplete="name" required>
-              </div>
-              <div class="field">
-                <label>E-Mail <span class="req">*</span></label>
-                <input type="email" name="email" autocomplete="email" required>
-              </div>
+              <div class="field"><label>Name <span class="req">*</span></label><input type="text" name="name" autocomplete="name" required></div>
+              <div class="field"><label>E-Mail <span class="req">*</span></label><input type="email" name="email" autocomplete="email" required></div>
             </div>
             <div class="form__row">
-              <div class="field">
-                <label>Firma / Labor</label>
-                <input type="text" name="labor" autocomplete="organization">
-              </div>
-              <div class="field">
-                <label>Menge <span class="req">*</span></label>
-                <select name="menge" required>
-                  <option value="1">1 Vial</option>
-                  <option value="2">2 Vials</option>
-                  <option value="3">3 Vials</option>
-                  <option value="5">5 Vials</option>
-                  <option value="10">10 Vials</option>
-                </select>
+              <div class="field"><label>Firma / Labor</label><input type="text" name="labor" autocomplete="organization"></div>
+              <div class="field"><label>Menge <span class="req">*</span></label>
+                <select name="menge" required><option>1 Vial</option><option>2 Vials</option><option>3 Vials</option><option>5 Vials</option><option>10 Vials</option></select>
               </div>
             </div>
-            <div class="field">
-              <label>Anmerkung</label>
-              <textarea name="notiz" rows="3" placeholder="z. B. gewünschtes Lieferdatum oder Chargen-Anforderung"></textarea>
-            </div>
-            <button class="btn btn--primary btn--block btn--lg" type="submit">Bestellung anfragen &middot; CHF&nbsp;32.90</button>
+            <button class="btn btn--primary btn--block btn--lg" type="submit">Bestellung anfragen · CHF&nbsp;32.90</button>
             <p class="form-feedback" role="status" aria-live="polite"></p>
           </form>
         </div>
@@ -117,12 +108,11 @@
 
     <section class="section section--tint related">
       <div class="container">
-        <div class="section__head"><p class="eyebrow">Passend dazu</p><h2>Ähnliche Produkte</h2></div>
+        <div class="section__head"><h2>Ähnliche Produkte</h2></div>
         <div class="card-grid">
       <article class="product-card" data-category="kosmetik">
         <a class="product-card__media" href="produkt-ghk-cu.html" aria-label="GHK-Cu (Kupferpeptid) ansehen">
-          <img src="assets/img/products/ghk-cu.svg" alt="GHK-Cu (Kupferpeptid) – 50 mg Vial" loading="lazy">
-          <span class="pill pill--violet product-card__tag">Bestseller</span>
+          <img src="assets/img/products/ghk-cu.svg" alt="GHK-Cu (Kupferpeptid) – 50 mg Vial" loading="lazy"><span class="pill pill--violet product-card__tag">Bestseller</span>
         </a>
         <div class="product-card__body">
           <span class="product-card__cat">Kosmetik-Peptide</span>
@@ -130,14 +120,13 @@
           <p class="product-card__desc">Kupferkomplex des Tripeptids GHK für Formulierungsforschung.</p>
           <div class="product-card__foot">
             <span class="price">CHF&nbsp;34.90</span>
-            <a class="btn btn--ghost" href="produkt-ghk-cu.html">Details</a>
+            <button class="add-btn" type="button" data-add="ghk-cu" aria-label="GHK-Cu (Kupferpeptid) in den Warenkorb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
           </div>
         </div>
       </article>
       <article class="product-card" data-category="kosmetik">
         <a class="product-card__media" href="produkt-matrixyl.html" aria-label="Matrixyl (Pal-KTTKS) ansehen">
           <img src="assets/img/products/matrixyl.svg" alt="Matrixyl (Pal-KTTKS) – 10 mg Vial" loading="lazy">
-          
         </a>
         <div class="product-card__body">
           <span class="product-card__cat">Kosmetik-Peptide</span>
@@ -145,14 +134,13 @@
           <p class="product-card__desc">Palmitoyl-Pentapeptid für die kosmetische Wirkstoffforschung.</p>
           <div class="product-card__foot">
             <span class="price">CHF&nbsp;37.90</span>
-            <a class="btn btn--ghost" href="produkt-matrixyl.html">Details</a>
+            <button class="add-btn" type="button" data-add="matrixyl" aria-label="Matrixyl (Pal-KTTKS) in den Warenkorb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
           </div>
         </div>
       </article>
       <article class="product-card" data-category="kosmetik">
         <a class="product-card__media" href="produkt-snap-8.html" aria-label="SNAP-8 Peptid ansehen">
-          <img src="assets/img/products/snap-8.svg" alt="SNAP-8 Peptid – 10 mg Vial" loading="lazy">
-          <span class="pill pill--violet product-card__tag">Neu</span>
+          <img src="assets/img/products/snap-8.svg" alt="SNAP-8 Peptid – 10 mg Vial" loading="lazy"><span class="pill pill--violet product-card__tag">Neu</span>
         </a>
         <div class="product-card__body">
           <span class="product-card__cat">Kosmetik-Peptide</span>
@@ -160,7 +148,7 @@
           <p class="product-card__desc">Octapeptid, Weiterentwicklung des Argireline-Konzepts.</p>
           <div class="product-card__foot">
             <span class="price">CHF&nbsp;36.50</span>
-            <a class="btn btn--ghost" href="produkt-snap-8.html">Details</a>
+            <button class="add-btn" type="button" data-add="snap-8" aria-label="SNAP-8 Peptid in den Warenkorb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
           </div>
         </div>
       </article>
@@ -174,35 +162,37 @@
         <div class="footer-brand">
           <img src="assets/img/logo.svg" alt="HELIX PEPTIDES">
           <p>Peptide und Laborbedarf in dokumentierter Forschungsqualität. Jede Charge mit Analysezertifikat (CoA).</p>
-          <p><strong style="color:#fff">Nur für Forschungs- und Laborzwecke.</strong><br>Nicht für den menschlichen oder tierischen Gebrauch.</p>
+          <p style="color:#fff"><strong>Nur für Forschungs- und Laborzwecke.</strong><br><span style="color:#aebccb">Nicht für den menschlichen oder tierischen Gebrauch.</span></p>
         </div>
         <div>
           <h4>Shop</h4>
-          <ul><li><a href="produkte.html#forschung">Forschungspeptide</a></li><li><a href="produkte.html#kosmetik">Kosmetik-Peptide</a></li><li><a href="produkte.html#zubehor">Laborzubehör</a></li><li><a href="produkte.html">Alle Produkte</a></li></ul>
+          <ul><li><a href="produkte.html#forschung">Forschungspeptide</a></li><li><a href="produkte.html#kosmetik">Kosmetik-Peptide</a></li><li><a href="produkte.html#zubehor">Laborzubehör</a></li><li><a href="produkte.html">Alle Produkte</a></li><li><a href="warenkorb.html">Warenkorb</a></li></ul>
         </div>
         <div>
           <h4>Service</h4>
           <ul>
             <li><a href="kontakt.html">Kontakt</a></li>
-            <li><a href="kontakt.html#versand">Versand &amp; Lieferung</a></li>
-            <li><a href="kontakt.html">CoA anfordern</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="faq.html#versand">Versand &amp; Lieferung</a></li>
           </ul>
         </div>
         <div>
           <h4>Rechtliches</h4>
           <ul>
-            <li><a href="#">Impressum</a></li>
-            <li><a href="#">Datenschutz</a></li>
-            <li><a href="#">AGB</a></li>
+            <li><a href="impressum.html">Impressum</a></li>
+            <li><a href="datenschutz.html">Datenschutz</a></li>
+            <li><a href="agb.html">AGB</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
         <span>&copy; <span data-year>2026</span> HELIX PEPTIDES &mdash; Fiktiver Webshop für das Modul M293 (Schulprojekt).</span>
-        <span>Bottighofen, Schweiz</span>
+        <span class="mono">Bottighofen, Schweiz</span>
       </div>
     </div>
   </footer>
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

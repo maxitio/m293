@@ -48,15 +48,24 @@ projekt/
 ├── produkte.html          # Produktübersicht mit Kategoriefilter
 ├── produkt-<slug>.html    # 12 Detailseiten (generiert)
 ├── kontakt.html           # Kontakt + Team
+├── warenkorb.html         # Warenkorb (Web Storage)
+├── danke.html             # Bestellbestätigung
+├── faq.html               # FAQ inkl. Versand & Lieferung
+├── impressum.html · datenschutz.html · agb.html   # Rechtliches
 ├── css/
-│   └── style.css          # gesamtes Design (Design-Tokens, Grid, Responsive)
+│   └── style.css          # gesamtes Design (Design-Tokens, Grid, Responsive, Motion)
 ├── js/
-│   └── main.js            # Nav, Filter, Formular-Validierung, mailto
+│   ├── products.js        # Produktdaten für den Warenkorb (generiert)
+│   ├── cart.js            # Warenkorb über localStorage + Header-Badge + Toast
+│   └── main.js            # Nav, Filter, Formular-Validierung, mailto, Danke-Seite
 ├── assets/img/            # SVG-Logo, Produktbilder, Team-Avatare
 ├── tools/
-│   └── generate.py        # Build-Hilfe: erzeugt SVGs + HTML aus 1 Datenquelle
+│   └── generate.py        # Build-Hilfe: erzeugt SVGs + HTML + products.js aus 1 Datenquelle
+├── PRODUCT.md · DESIGN.md # Design-Kontext (impeccable-Skill: Register, Marke, Visuals)
 └── docs/                  # Wireframes, Styleguide, KI-Einsatz
 ```
+
+**21 HTML-Seiten** insgesamt: 4 Hauptseiten + 12 Produkt-Detailseiten + 5 Zusatzseiten.
 
 ### Warum ein Generator-Skript?
 Die 12 Detailseiten teilen sich Header, Footer und Aufbau. Statt 12-mal Code zu
@@ -102,7 +111,16 @@ Da der Shop im Unterordner `projekt/` des Repos `m293` liegt:
 
 ## 🧩 Optionale Features (laut Auftrag freiwillig)
 
+- ✔️ **Warenkorb mit zentralem Bestellformular** (Web Storage API / `localStorage`):
+  Produkte sammeln, Mengen ändern, Header-Badge, Versandlogik (ab CHF 100 gratis),
+  Abschluss → Bestellbestätigung (`danke.html`).
 - ✔️ JavaScript-Kategoriefilter mit teilbarem URL-Hash
-- ✔️ Formular-Validierung & `mailto:`-Bestell-/Kontaktrouting
-- ➖ Warenkorb / Login / Merkliste (Web Storage) – bewusst nicht umgesetzt,
-  da optional und nicht Teil der Pflichtanforderungen.
+- ✔️ Formular-Validierung, `mailto:`-Betreff-Routing im Kontaktformular
+- ➖ Benutzerkonto / Login / Merkliste – nicht umgesetzt (optional, nicht Pflicht).
+
+## 🎨 Design / KI-Workflow
+
+Das Design wurde mit dem **impeccable**-Frontend-Skill verfeinert (Register „brand",
+Slop-Vermeidung). Strategische und visuelle Entscheidungen sind in
+[`PRODUCT.md`](PRODUCT.md) und [`DESIGN.md`](DESIGN.md) dokumentiert; der Vergleich
+der KI-Tools steht in [`docs/ki-einsatz.md`](docs/ki-einsatz.md).

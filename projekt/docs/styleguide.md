@@ -18,47 +18,58 @@ Dunkler Hero/Footer als Rahmen, helle Inhaltsflächen dazwischen.
 
 | Rolle | Variable | HEX | Verwendung |
 |-------|----------|-----|------------|
-| Text (primär) | `--c-ink` | `#14181f` | Fliesstext, Überschriften |
-| Text (sekundär) | `--c-muted` | `#5b6573` | Hilfetexte, Captions |
-| Hintergrund | `--c-bg` | `#ffffff` | Seite |
-| Fläche | `--c-surface` | `#f4f7fa` | Karten, getönte Sektionen |
-| Linien | `--c-line` | `#dce3ec` | Rahmen, Trenner |
-| **Akzent (primär)** | `--c-accent` | `#0fa3a3` | Buttons, Links, Icons |
-| Akzent dunkel | `--c-accent-dark` | `#0b7e7e` | Hover, Linktext |
-| **Akzent (sekundär)** | `--c-accent-2` | `#5b54d6` | Verläufe, „Neu"-Badge |
-| Dunkel | `--c-deep` | `#0e1622` | Hero, Footer |
-| Erfolg | `--c-ok` | `#1f9d57` | Formular-Feedback |
+| Text (primär) | `--c-ink` | `#0b1016` | Fliesstext, dunkle Drench-Flächen |
+| Text (sekundär) | `--c-muted` | `#566273` | Hilfetexte, Captions (≥4.5:1 auf Weiss) |
+| Hintergrund | `--c-bg` | `#ffffff` | helle Seiten |
+| Fläche | `--c-surface` | `#f1f5f8` | Karten, getönte Sektionen |
+| Linien | `--c-line` | `#d7dee7` | Rahmen, Trenner |
+| **Akzent Teal** | `--c-accent` | `#0c8f8f` | Buttons, Links auf Hell |
+| Akzent dunkel | `--c-accent-dark` | `#0a7373` | Hover, Linktext |
+| **Teal vivid** | `--c-accent-bright` | `#19e3c4` | Akzent auf Dunkel (Drench-CTA) |
+| **Akzent Violett** | `--c-accent-2` | `#6a5cf0` | Verläufe, „Neu"-Badge, Cart-Badge |
+| Erfolg | `--c-ok` | `#1f9d57` | Formular-Feedback, Toast |
 | Warnung | `--c-warn` | `#c98a00` | Disclaimer-Banner |
 
-**Kontrast:** Text (`#14181f`) auf Weiss erreicht ca. 15:1, Akzent-Buttons (weisser
-Text auf `#0fa3a3`) ca. 3.4:1 für grosse/fette Schrift → erfüllt WCAG AA.
+**Strategie: Committed.** Teal trägt die Identität, near-black `#0b1016` „drencht"
+Hero/Footer/USP-Sektion, Violett ist der sekundäre Spannungspol.
 
-### Farbverlauf (Hero)
+**Kontrast (geprüft):** `#0b1016` auf Weiss ≈ 17:1, `#566273` auf Weiss ≈ 4.7:1,
+`#19e3c4` auf `#0b1016` ≈ 11:1 → erfüllt WCAG AA.
+
+### Farbverlauf (Hero, drenched)
 ```
-radial-gradient(rgba(91,84,214,.55)) + radial-gradient(rgba(15,163,163,.55)) auf #0e1622
+radial(rgba(106,92,240,.42)) + radial(rgba(25,227,196,.30)) + Raster-Mask auf #0b1016
 ```
 
 ---
 
 ## 3. Typografie
 
-| Einsatz | Font | Gewichte | Beispiel |
-|---------|------|----------|----------|
-| Überschriften / UI | **Space Grotesk** | 500 / 600 / 700 | H1–H4, Buttons, Preise |
-| Fliesstext | **Inter** | 400 / 500 / 600 | Absätze, Formulare |
+Bewusst **nicht** Inter/Space Grotesk (häufige KI-Default-Fonts) → eine Familie,
+committet über Gewicht + Breite, plus Mono für Datenwerte:
 
-Eingebunden über Google Fonts. Fallback-Stack: `system-ui, "Segoe UI", sans-serif`.
+| Einsatz | Font | Gewichte |
+|---------|------|----------|
+| Display / H1–H2 | **Archivo Expanded** | 700 / 800 (breit, neg. Tracking) |
+| UI / H3 / Body | **Archivo** | 400 / 500 / 600 |
+| Datenwerte (Reinheit, MW, Preis, Charge) | **Spline Sans Mono** | 400 / 500 |
+
+Eingebunden über Google Fonts. Fallback: `system-ui, "Segoe UI", sans-serif`.
 
 ### Typo-Skala (responsive via `clamp()`)
 
 | Element | Grösse | Zeilenhöhe |
 |---------|--------|-----------|
-| H1 | `clamp(2rem, 5vw, 3.1rem)` | 1.15 |
-| H2 | `clamp(1.5rem, 3.5vw, 2.2rem)` | 1.15 |
+| Hero-H1 | `clamp(2.4rem, 6vw, 4.4rem)` | 1.08 |
+| H2 | `clamp(1.7rem, 4vw, 2.8rem)` | 1.08 |
 | H3 | `1.25rem` | 1.15 |
-| Lead | `1.1rem` | 1.65 |
+| Lead | `clamp(1.05rem, 1.6vw, 1.2rem)` | 1.65 |
 | Body | `1rem` (16px) | 1.65 |
-| Eyebrow / Caption | `0.78rem`, `letter-spacing .14em`, UPPERCASE | – |
+| Mono-Daten | `0.72–1.1rem`, `tnum`, neg. Tracking | – |
+
+> Slop bewusst vermieden: **kein** Eyebrow über jeder Section (stattdessen ein
+> einziger Kicker-Stil), keine Hero-Metrik-Kacheln (stattdessen Trust-Ticker),
+> kein Gradient-Text.
 
 ---
 
@@ -79,10 +90,14 @@ Sektionen nutzen `--sp-6` vertikal, Karten-Innenabstand `--sp-2`/`--sp-3`.
 
 ## 6. Komponenten (Auszug)
 
-- **Button:** `.btn` + Variante (`--primary`, `--ghost`, `--light`), `--lg`, `--block`.
-- **Produktkarte:** `.product-card` mit Media (4:3), Kategorie, Titel, Preis, CTA.
-- **Pill/Badge:** `.pill` (`--accent`, `--violet`) für Status wie „Neu" oder „inkl. CoA".
+- **Button:** `.btn` + Variante (`--primary`, `--bright`, `--ghost`, `--light`), `--lg`, `--block`.
+- **Produktkarte:** `.product-card` mit Media (4:3 SVG), Kategorie, Mono-Preis, „+"-Add-Button.
+- **Cart:** Header-Button mit violettem Anzahl-Badge; Warenkorbseite mit Mengen-Steppern.
+- **Spec-Chip:** Mono-Datenwert (Reinheit/MW/Charge) – „Instrument-Readout".
+- **Pill/Badge:** `.pill` (`--accent`, `--violet`, `--bright`) für „Neu"/„inkl. CoA".
 - **Formularfeld:** `.field` mit Label, Pflicht-Marker `.req`, Fokus-Ring in Akzentfarbe.
+- **FAQ-Accordion:** natives `<details>/<summary>` (funktioniert ohne JS).
+- **Toast:** kurze Bestätigung beim Hinzufügen zum Warenkorb.
 - **Disclaimer:** gelbes Hinweis-Banner „Research Use Only".
 
 ## 7. Breakpoints
