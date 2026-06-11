@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="BPC-157">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0fa3a3"/><stop offset="1" stop-color="#0a7575"/>
+    </linearGradient>
+    <linearGradient id="liq" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".55"/><stop offset="1" stop-color="#ffffff" stop-opacity=".15"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/>
+  <circle cx="320" cy="70" r="120" fill="#ffffff" opacity="0.06"/>
+  <circle cx="70" cy="250" r="90" fill="#ffffff" opacity="0.06"/>
+  <circle cx="150" cy="242" r="9" fill="#fff" opacity="0.9"/><line x1="150" y1="242" x2="180" y2="258" stroke="#fff" stroke-width="3" opacity="0.7"/><circle cx="180" cy="258" r="9" fill="#fff" opacity="0.9"/><line x1="180" y1="258" x2="210" y2="242" stroke="#fff" stroke-width="3" opacity="0.7"/><circle cx="210" cy="242" r="9" fill="#fff" opacity="0.9"/><line x1="210" y1="242" x2="240" y2="258" stroke="#fff" stroke-width="3" opacity="0.7"/><circle cx="240" cy="258" r="9" fill="#fff" opacity="0.9"/><line x1="240" y1="258" x2="270" y2="242" stroke="#fff" stroke-width="3" opacity="0.7"/><circle cx="270" cy="242" r="9" fill="#fff" opacity="0.9"/><line x1="270" y1="242" x2="300" y2="258" stroke="#fff" stroke-width="3" opacity="0.7"/><circle cx="300" cy="258" r="9" fill="#fff" opacity="0.9"/>
+  <!-- Vial -->
+  <g transform="translate(175,70)">
+    <rect x="14" y="-14" width="22" height="16" rx="3" fill="#dfe7ee"/>
+    <rect x="10" y="0" width="30" height="10" rx="2" fill="#b9c6d4"/>
+    <rect x="6" y="10" width="38" height="150" rx="12" fill="#ffffff" opacity="0.9"/>
+    <rect x="6" y="70" width="38" height="90" rx="12" fill="url(#liq)"/>
+    <rect x="13" y="16" width="6" height="40" rx="3" fill="#ffffff" opacity="0.8"/>
+  </g>
+  <text x="200" y="285" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="15" fill="#ffffff" opacity="0.85" letter-spacing="1">5 mg</text>
+</svg>
