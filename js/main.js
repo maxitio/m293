@@ -62,14 +62,16 @@
 
     /* ---------- 4. Validierungs-Helfer ---------- */
     function showFeedback(form, message, ok) {
-        var box = form.querySelector(".form-feedback");
+        // Feedback-Element kann im Formular ODER direkt daneben stehen
+        var box = form.querySelector(".form-feedback") ||
+            (form.parentElement && form.parentElement.querySelector(".form-feedback"));
         if (!box) return;
         box.textContent = message;
         box.className = "form-feedback " + (ok ? "is-ok" : "is-err");
     }
     function isEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
 
-    /* ---------- 5. Newsletter ---------- */
+    /* ---------- 5. Newsletter (Demo – keine Datenspeicherung) ---------- */
     document.querySelectorAll("[data-newsletter]").forEach(function (form) {
         form.addEventListener("submit", function (e) {
             e.preventDefault();
@@ -85,8 +87,7 @@
     });
 
     /* ---------- 6. Bestellformular (Detailseite) ----------
-       Native Submit ist GET auf danke.html (funktioniert auch ohne JS).
-       JS prüft nur die Pflichtfelder vorab und stoppt bei Fehlern. */
+       Validierung; gültig -> native GET-Navigation zu danke.html. */
     document.querySelectorAll("[data-order-form]").forEach(function (form) {
         form.addEventListener("submit", function (e) {
             var data = new FormData(form);
@@ -94,11 +95,10 @@
             var email = (data.get("email") || "").toString().trim();
             if (name.length < 2) { e.preventDefault(); showFeedback(form, "Bitte Namen angeben.", false); return; }
             if (!isEmail(email)) { e.preventDefault(); showFeedback(form, "Bitte gültige E-Mail-Adresse angeben.", false); return; }
-            // gültig -> native Navigation zu danke.html?type=order&produkt=...
         });
     });
 
-    /* ---------- 7. Kontaktformular (Betreff-Routing via mailto) ---------- */
+    /* ---------- 7. Kontaktformular (Betreff-Routing per mailto) ---------- */
     var contact = document.querySelector("[data-contact-form]");
     if (contact) {
         contact.addEventListener("submit", function (e) {
@@ -112,6 +112,7 @@
             if (!isEmail(email)) { showFeedback(contact, "Bitte gültige E-Mail-Adresse angeben.", false); return; }
             if (!betreff) { showFeedback(contact, "Bitte ein Betreff auswählen.", false); return; }
             if (nachricht.length < 10) { showFeedback(contact, "Bitte eine etwas längere Nachricht schreiben.", false); return; }
+
             var routing = {
                 "Bestellung & Versand": "bestellung@helix-peptides.example",
                 "Produktfrage": "lab@helix-peptides.example",
@@ -146,11 +147,7 @@
         }
     }
 
-    /* ---------- 9. Reveal-Motion beim Laden (nur, wenn nicht reduziert) ---------- */
-    if (!window.matchMedia || !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        // Elemente mit [data-reveal] bekommen gestaffelt die reveal-Klassen
-        document.querySelectorAll("[data-reveal]").forEach(function (el, i) {
-            el.classList.add(i === 0 ? "reveal" : "reveal-" + Math.min(i + 1, 4));
-        });
-    }
+    /* ---------- 9. Reveal-Motion ----------
+       Entrance- und Scroll-Animationen liegen zentral in js/motion.js
+       (Web Animations API, respektiert prefers-reduced-motion). */
 })();

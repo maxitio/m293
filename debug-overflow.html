@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>overflow-debug</title>
+<iframe src="index.html" width="390" height="2400" id="f"></iframe>
+<pre id="out">PENDING</pre>
+<script>
+  var f = document.getElementById("f");
+  f.onload = function () {
+    setTimeout(function () {
+      var d = f.contentDocument;
+      var wide = [];
+      d.querySelectorAll("*").forEach(function (el) {
+        var r = el.getBoundingClientRect();
+        if (r.right > 392 || r.left < -2) {
+          var cls = typeof el.className === "string" ? el.className : (el.className.baseVal || "");
+          wide.push(el.tagName + "." + cls.split(" ")[0] + " L=" + Math.round(r.left) + " R=" + Math.round(r.right));
+        }
+      });
+      document.getElementById("out").textContent =
+        "DOCWIDTH=" + d.documentElement.scrollWidth + "\n" + wide.slice(0, 80).join("\n");
+      document.title = "DONE";
+    }, 1200);
+  };
+</script>

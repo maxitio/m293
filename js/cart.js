@@ -154,17 +154,17 @@
             if (q) { setQty(q.getAttribute("data-qty"), parseInt(q.value, 10) || 1); render(); }
         });
 
-        // Bestellung absenden: Inhalt in verstecktes Feld, Korb leeren, dann
-        // native Navigation zu danke.html (GET).
+        // Bestellung absenden: Inhalt in verstecktes Feld schreiben,
+        // Korb leeren, dann native GET-Navigation zu danke.html.
         if (orderForm) {
             orderForm.addEventListener("submit", function (e) {
                 var cart = read();
                 if (Object.keys(cart).length === 0) { e.preventDefault(); return; }
                 var name = (orderForm.querySelector('[name="name"]') || {}).value || "";
                 var email = (orderForm.querySelector('[name="email"]') || {}).value || "";
+                var fb = orderForm.querySelector(".form-feedback");
                 if (name.trim().length < 2 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
                     e.preventDefault();
-                    var fb = orderForm.querySelector(".form-feedback");
                     if (fb) { fb.textContent = "Bitte Name und gültige E-Mail angeben."; fb.className = "form-feedback is-err"; }
                     return;
                 }
@@ -173,8 +173,7 @@
                 }).join(", ");
                 var hidden = orderForm.querySelector('[name="bestellung"]');
                 if (hidden) hidden.value = summary + " | Total " + chf(total(cart));
-                localStorage.removeItem(KEY); // Korb leeren
-                // native Submit folgt -> danke.html
+                localStorage.removeItem(KEY); // Korb leeren, native Submit folgt
             });
         }
 

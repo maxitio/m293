@@ -15,7 +15,7 @@ optionale Funktionen (Filter, Formular-Komfort, mobile Navigation).
 
 ## 🔗 Links
 
-- **Live (GitHub Pages):** _<nach Veröffentlichung eintragen>_
+- **Live (GitHub Pages):** https://maxitio.github.io/m293/
 - **Repository:** https://github.com/maxitio/m293
 
 ---
@@ -36,14 +36,13 @@ optionale Funktionen (Filter, Formular-Komfort, mobile Navigation).
 | **Responsive** (Mobile/Tablet/Desktop) | `@media`-Breakpoints 680px / 960px |
 | Wireframes (Markdown) | [`docs/wireframes.md`](docs/wireframes.md) |
 | Styleguide (Markdown) | [`docs/styleguide.md`](docs/styleguide.md) |
-| KI-Doku, 2 Tools verglichen (Markdown) | [`docs/ki-einsatz.md`](docs/ki-einsatz.md) |
+| KI-Doku, 2 Tools verglichen (Markdown) | [`KI-DOKU.md`](KI-DOKU.md) |
 
 ---
 
 ## 📁 Projektstruktur
 
 ```
-projekt/
 ├── index.html             # Startseite
 ├── produkte.html          # Produktübersicht mit Kategoriefilter
 ├── produkt-<slug>.html    # 12 Detailseiten (generiert)
@@ -81,7 +80,7 @@ Reine statische Seite – einfach `index.html` im Browser öffnen.
 Empfohlen (für korrekte Pfade) ein kleiner lokaler Server:
 
 ```bash
-# im Ordner projekt/
+# im Hauptordner des Repositories
 python -m http.server 8000
 # dann http://localhost:8000 öffnen
 ```
@@ -96,16 +95,13 @@ python tools/generate.py
 
 ## 🚀 Veröffentlichung auf GitHub Pages
 
-Da der Shop im Unterordner `projekt/` des Repos `m293` liegt:
+Da der Shop direkt im Hauptverzeichnis (Root) des Repos `m293` liegt:
 
 1. GitHub → Repo **m293** → **Settings → Pages**
 2. *Source:* **Deploy from a branch**, Branch **main**, Ordner **/ (root)**
 3. Speichern. Nach ~1 Min. ist die Seite erreichbar unter
-   `https://maxitio.github.io/m293/projekt/`
+   `https://maxitio.github.io/m293/`
 4. Diesen Link oben unter **Live** und in der Abgabe eintragen.
-
-> Alternativ kann der Inhalt von `projekt/` in einen eigenen Branch `gh-pages`
-> oder ein eigenes Repo verschoben werden, dann liegt die Seite im Root.
 
 ---
 
@@ -123,4 +119,4 @@ Da der Shop im Unterordner `projekt/` des Repos `m293` liegt:
 Das Design wurde mit dem **impeccable**-Frontend-Skill verfeinert (Register „brand",
 Slop-Vermeidung). Strategische und visuelle Entscheidungen sind in
 [`PRODUCT.md`](PRODUCT.md) und [`DESIGN.md`](DESIGN.md) dokumentiert; der Vergleich
-der KI-Tools steht in [`docs/ki-einsatz.md`](docs/ki-einsatz.md).
+der KI-Tools steht in [`KI-DOKU.md`](KI-DOKU.md).
